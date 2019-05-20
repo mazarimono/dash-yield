@@ -6,3 +6,5 @@ pandas_datareader
 plotly 
 gunicorn 
 lxml
+os 
+json
