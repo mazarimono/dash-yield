@@ -27,7 +27,7 @@ server = app.server
 
 app.layout = html.Div([
     html.Div([
-        html.H1('米国金利データミュージアム', style ={'textAlign': 'center'}),
+        html.H1('米国金利データ', style ={'textAlign': 'center'}),
         dcc.DatePickerRange(
             id = 'date-picker',
             minimum_nights = 5,
