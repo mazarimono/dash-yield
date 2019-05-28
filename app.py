@@ -75,49 +75,54 @@ def makeYieldHist(start_date, end_date):
             ) for i in histdf['variable'].unique()
         ],
         'layout':{
-            'title': '米国の主要金利'
+            'title': '米国の主要金利',
+            'clickmode': 'event+select'
         }
     }
 
-@app.callback(dash.dependencies.Output('yield-curve-right', 'figure'),
-            [dash.dependencies.Input('historical-left', 'hoverData')])
-def makeYieldCurve(hoverData):
-    try:
-        selectedDate = hoverData['points'][0]['x']
-    except:
-        selectedDate = '2000-12-18'
-    
-    selecteddf = yieldOnly[yieldOnly['date'] == selectedDate]
-    return {
-        'data':[
-            go.Parcoords(
-                line = dict(color='blue'),
-                dimensions = list([
-                    dict(range = [0, 7],
-                        label = 'FF Rate', values = selecteddf['ffrate']
-                    ),
-                    dict(range = [0, 7],
-                        label = '3M Treasury', values = selecteddf['3mT']
-                    ),
-                    dict(range = [0, 7],
-                        label = '2Y Treasury', values = selecteddf['2yT']
-                    ),
-                    dict(range = [0, 7],
-                        label = '5Y Treasury', values = selecteddf['5yT']
-                    ),
-                    dict(range = [0, 7],
-                        label = '10Y Treasury', values = selecteddf['10yT']
-                    ),
-                    dict(range = [0, 7],
-                        label = '30Y Treasury', values = selecteddf['30yT']
-                    ),
-                ])
-            )
-        ],
-        'layout':{
-            'title': '{}のイールドカーブ'.format(selectedDate)
-        }
-    }
+@app.callback(dash.dependencies.Output('test', 'children'),
+            [dash.dependencies.Input('historical-left', 'selectedData')])
+def makeYieldCurve(selectedData):
+    # dateList = list()
+    return json.dumps(selectedData)
+    # if selectedData == 'None':
+    #     dateList.append('2000-12-18')
+    # else:
+    #     lenOfData = len(selectedData['points'])
+    #     for i in range(lenOfData):
+    #         date = selectedData['points'][i]['x']
+    #         dateList.append(date)
+
+    # return {
+    #     'data':[
+    #         go.Parcoords(
+    #             line = dict(color='blue'),
+    #             dimensions = list([
+    #                 dict(range = [0, 7],
+    #                     label = 'FF Rate', values = yieldOnly[yieldOnly['date'] == i]['ffrate']
+    #                 ),
+    #                 dict(range = [0, 7],
+    #                     label = '3M Treasury', values = yieldOnly[yieldOnly['date'] == i]['3mT']
+    #                 ),
+    #                 dict(range = [0, 7],
+    #                     label = '2Y Treasury', values = yieldOnly[yieldOnly['date'] == i]['2yT']
+    #                 ),
+    #                 dict(range = [0, 7],
+    #                     label = '5Y Treasury', values = yieldOnly[yieldOnly['date'] == i]['5yT']
+    #                 ),
+    #                 dict(range = [0, 7],
+    #                     label = '10Y Treasury', values = yieldOnly[yieldOnly['date'] == i]['10yT']
+    #                 ),
+    #                 dict(range = [0, 7],
+    #                     label = '30Y Treasury', values = yieldOnly[yieldOnly['date'] == i]['30yT']
+    #                 ),
+    #             ])
+    #         ) for i in dateList 
+    #     ],
+    #     'layout':{
+    #         'title': 'イールドカーブ',
+    # }
+    # }
 
 @app.callback(dash.dependencies.Output('spreadGraph', 'figure'),
             [dash.dependencies.Input('spread-dropdown', 'value')])
