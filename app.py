@@ -37,10 +37,12 @@ app.layout = html.Div([
         ),
         html.Div([
             dcc.Graph(id = 'historical-left'),
+            html.H3('見たい範囲を上の日付ピッカー、もしくはマウスのドラッグで選択できます', style={'textAlign': 'center'}),
             ], style = {'width': '49%', 'display': 'inline-block'}),
         html.Div([
             html.H1(id='test'),
             dcc.Graph(id = 'yield-curve-right'),
+            html.H3('左の米国の主要金利のグラフでマウスホバーした地点のイールドカーブが表示できます。', style={'textAlign': 'center'}),
         ], style = {'width': '49%','display': 'inline-block'}),
     ], style = {'height': '1000', 'margin': '2%'}),
     html.Div([
