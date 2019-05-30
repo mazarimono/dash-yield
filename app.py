@@ -27,7 +27,7 @@ server = app.server
 
 app.layout = html.Div([
     html.Div([
-        html.H1('米国金利データ', style ={'textAlign': 'center'}),
+        html.H1('US Yield Data', style ={'textAlign': 'center'}),
         dcc.DatePickerRange(
             id = 'date-picker',
             minimum_nights = 5,
@@ -37,17 +37,17 @@ app.layout = html.Div([
         ),
         html.Div([
             dcc.Graph(id = 'historical-left'),
-            html.H3('見たい範囲を上の日付ピッカー、もしくはマウスのドラッグで選択できます', style={'textAlign': 'center'}),
+            # html.H3('見たい範囲を上の日付ピッカー、もしくはマウスのドラッグで選択できます', style={'textAlign': 'center'}),
             ], style = {'width': '49%', 'display': 'inline-block'}),
         html.Div([
             html.H1(id='test'),
             dcc.Graph(id = 'yield-curve-right'),
-            html.H3('左の米国の主要金利のグラフでマウスホバーした地点のイールドカーブが表示できます。', style={'textAlign': 'center'}),
+            # html.H3('左の米国の主要金利のグラフでマウスホバーした地点のイールドカーブが表示できます。', style={'textAlign': 'center'}),
         ], style = {'width': '49%','display': 'inline-block'}),
     ], style = {'height': '1000', 'margin': '2%'}),
     html.Div([
         html.Div([
-            html.H1('各種金利スプレッド')
+            html.H1('Major Yeild Spreads')
         ], style={'textAlign': 'center'}),
         html.Div([
             dcc.Dropdown(
@@ -77,7 +77,7 @@ def makeYieldHist(start_date, end_date):
             ) for i in histdf['variable'].unique()
         ],
         'layout':{
-            'title': '米国の主要金利'
+            'title': 'US Yeild'
         }
     }
 
@@ -117,7 +117,7 @@ def makeYieldCurve(hoverData):
             )
         ],
         'layout':{
-            'title': '{}のイールドカーブ'.format(selectedDate)
+            'title': 'Yield Curve Date: {}'.format(selectedDate)
         }
     }
 
